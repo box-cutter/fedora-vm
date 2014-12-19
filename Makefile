@@ -214,6 +214,11 @@ $(VIRTUALBOX_BOX_DIR)/fedora18-i386$(BOX_SUFFIX): fedora18-i386.json $(SOURCES) 
 #	mkdir -p $(PARALLELS_BOX_DIR)
 #	packer build -only=parallels-iso $(PACKER_VARS) $<
 
+$(PARALLELS_BOX_DIR)/fedora21$(BOX_SUFFIX): fedora21.json $(SOURCES) http/ks.cfg
+	rm -rf $(PARALLELS_OUTPUT)
+	mkdir -p $(PARALLELS_BOX_DIR)
+	packer build -only=$(PARALLELS_BUILDER) $(PACKER_VARS) -var "iso_url=$(FEDORA21_X86_64)" $<
+
 $(PARALLELS_BOX_DIR)/fedora20$(BOX_SUFFIX): fedora20.json $(SOURCES) http/ks.cfg
 	rm -rf $(PARALLELS_OUTPUT)
 	mkdir -p $(PARALLELS_BOX_DIR)
@@ -228,6 +233,11 @@ $(PARALLELS_BOX_DIR)/fedora18$(BOX_SUFFIX): fedora18.json $(SOURCES) http/ks-fed
 	rm -rf $(PARALLELS_OUTPUT)
 	mkdir -p $(PARALLELS_BOX_DIR)
 	packer build -only=$(PARALLELS_BUILDER) $(PACKER_VARS) -var "iso_url=$(FEDORA18_X86_64)" $<
+
+$(PARALLELS_BOX_DIR)/fedora21-i386$(BOX_SUFFIX): fedora21-i386.json $(SOURCES) http/ks.cfg
+	rm -rf $(PARALLELS_OUTPUT)
+	mkdir -p $(PARALLELS_BOX_DIR)
+	packer build -only=$(PARALLELS_BUILDER) $(PACKER_VARS) -var "iso_url=$(FEDORA21_I386)" $<
 
 $(PARALLELS_BOX_DIR)/fedora20-i386$(BOX_SUFFIX): fedora20-i386.json $(SOURCES) http/ks.cfg
 	rm -rf $(PARALLELS_OUTPUT)
